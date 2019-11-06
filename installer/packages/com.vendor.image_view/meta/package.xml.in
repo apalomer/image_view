@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>The root component</DisplayName>
+    <Description>Install this example.</Description>
+    <Version>@IMAGE_VIEW_VERSION@</Version>
+    <ReleaseDate>@TODAY@</ReleaseDate>
+    <Licenses>
+        <License name="This is the license" file="license.txt" />
+    </Licenses>
+    <Script>script.js</Script>
+    <ForcedInstallation>true</ForcedInstallation>
+    <Checkable>false</Checkable>
+</Package>

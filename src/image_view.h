@@ -18,6 +18,8 @@ public:
     explicit ImageView(QWidget *parent = nullptr);
     ~ImageView();
 
+public slots:
+  void loadImageByName(QString file_name);
 private slots:
 
   void onImageOpen();

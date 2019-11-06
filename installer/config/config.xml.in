@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Image View</Name>
+    <Version>@IMAGE_VIEW_VERSION@</Version>
+    <Title>Image View installer</Title>
+    <Publisher>IQUA Robotics</Publisher>
+    <StartMenuDir>Image View</StartMenuDir>
+    <TargetDir>@ApplicationsDirX64@/ImageView</TargetDir>
+</Installer>
