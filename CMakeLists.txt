@@ -2,6 +2,11 @@
 cmake_minimum_required (VERSION 3.0)
 project (image_view LANGUAGES CXX)
 
+# Check that it is windows
+if (NOT MSVC)
+  message(FATAL_ERROR "This project can only be compiled with MSVC")
+endif()
+
 # Version
 set(IMAGE_VIEW_MAJOR_VERSION 0)
 set(IMAGE_VIEW_MINOR_VERSION 1)
@@ -50,15 +55,11 @@ if(CMAKE_INSTALL_PREFIX MATCHES "${CMAKE_SOURCE_DIR}/installer/packages/com.vend
   configure_file("${CMAKE_SOURCE_DIR}/installer/packages/com.vendor.image_view/meta/package.xml.in" "${CMAKE_SOURCE_DIR}/installer/packages/com.vendor.image_view/meta/package.xml" @ONLY)
   configure_file("${CMAKE_SOURCE_DIR}/installer/packages/com.vendor.image_view_data/meta/package.xml.in" "${CMAKE_SOURCE_DIR}/installer/packages/com.vendor.image_view_data/meta/package.xml" @ONLY)
   
-  if (UNIX)
-    install(CODE "execute_process(COMMAND binarycreator -c \"${CMAKE_SOURCE_DIR}/installer/config/config.xml\" -p \"${CMAKE_SOURCE_DIR}/installer/packages\" \"${CMAKE_SOURCE_DIR}/installer/ImageViewInstaller_${IMAGE_VIEW_VERSION}_ubuntu_${CMAKE_HOST_SYSTEM_PROCESSOR}\")")
-  else()
-    # Run windeploy qt
-    install(CODE "MESSAGE(\"Running windeployqt ${CMAKE_INSTALL_PREFIX}\")")
-    install(CODE "execute_process(COMMAND windeployqt \"${CMAKE_INSTALL_PREFIX}\")")
+  # Run windeploy qt
+  install(CODE "MESSAGE(\"Running windeployqt ${CMAKE_INSTALL_PREFIX}\")")
+  install(CODE "execute_process(COMMAND windeployqt \"${CMAKE_INSTALL_PREFIX}\")")
 
-    # Run qt installer framework generator
-    install(CODE "MESSAGE(\"Generating installer with qt framework (make sure binarycreator from QtInstallerFramework is added to the path)\")")
-    install(CODE "execute_process(COMMAND binarycreator -c \"${CMAKE_SOURCE_DIR}/installer/config/config.xml\" -p \"${CMAKE_SOURCE_DIR}/installer/packages\" \"${CMAKE_SOURCE_DIR}/installer/ImageViewInstaller_${IMAGE_VIEW_VERSION}_windows_${CMAKE_HOST_SYSTEM_PROCESSOR}\")")
-  endif()
+  # Run qt installer framework generator
+  install(CODE "MESSAGE(\"Generating installer with qt framework (make sure binarycreator from QtInstallerFramework is added to the path)\")")
+  install(CODE "execute_process(COMMAND binarycreator -c \"${CMAKE_SOURCE_DIR}/installer/config/config.xml\" -p \"${CMAKE_SOURCE_DIR}/installer/packages\" \"${CMAKE_SOURCE_DIR}/installer/ImageViewInstaller_${IMAGE_VIEW_VERSION}_windows_${CMAKE_HOST_SYSTEM_PROCESSOR}\")")
 endif()
